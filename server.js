@@ -16,10 +16,10 @@ const genres = [
 const createActor = (id, img, name, age) => ({ id, img, name, age })
 const actors = [
   createActor(1, 'foto...', 'Nombre Apell 1', 30),
-  createActor(2, 'foto...', 'Nombre Apell 1', 30),
-  createActor(3, 'foto...', 'Nombre Apell 1', 30),
-  createActor(4, 'foto...', 'Nombre Apell 1', 30),
-  createActor(5, 'foto...', 'Nombre Apell 1', 30),
+  createActor(2, 'foto...', 'Nombre Apell 2', 30),
+  createActor(3, 'foto...', 'Nombre Apell 3', 30),
+  createActor(4, 'foto...', 'Nombre Apell 4', 30),
+  createActor(5, 'foto...', 'Nombre Apell 5', 30),
 ];
 
 const createMovie = (id, name, description, duration, genre, actors) => ({ id, name, description, duration, genre, actors })

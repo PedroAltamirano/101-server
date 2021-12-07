@@ -7,12 +7,10 @@ const app = express()
 const port = 3000
 
 app.use(cors())
-// app.use(express.json())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
 const apiRouter = require('./router/api')
-
 app.use('/api', apiRouter)
 
 app.listen(port, () => {

@@ -33,4 +33,3 @@ app.use('/api', apiRouter)
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
 })
-exports.app = functions.https.onRequest(app);

@@ -1,10 +1,9 @@
 const { Sequelize } = require('sequelize');
 require('dotenv').config()
 
-const MovieModel = require('./models/movie')
-const ActorModel = require('./models/actor')
-const GenreModel = require('./models/genre')
-console.log(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSW)
+const MovieModel = require('../models/movie')
+const ActorModel = require('../models/actor')
+const GenreModel = require('../models/genre')
 
 const sequelize = new Sequelize(
   process.env.DB_NAME,

@@ -24,6 +24,7 @@ const Genre = GenreModel(sequelize, Sequelize)
 sequelize
   .sync({ force: false })
   .then(() => console.log('tablas sync'))
+  .catch(error => console.log('coneccion rechazada: ', error))
 
 module.exports = {
   Movie,

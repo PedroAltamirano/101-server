@@ -2,7 +2,16 @@ const express = require('express')
 const cors = require('cors')
 require('./db_connection')
 const multer = require('multer');
-const upload = multer();
+const storage = multer.diskStorage({
+  destination: 'public/uploads',
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + '-' + file.originalname)
+  }
+})
+const upload = multer({
+  storage,
+  limits: { fileSize: 1000000 }
+});
 
 const app = express()
 const port = 3000
@@ -16,7 +25,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 // multipart/form-data
-app.use(upload.array())
+app.use(upload.single('image'))
 app.use(express.static('public'))
 
 app.use('/api', apiRouter)

@@ -1,17 +1,13 @@
 const express = require('express')
 const cors = require('cors')
-require('./db_connection')
+require('./config/db_connection')
 const multer = require('multer');
-const storage = multer.diskStorage({
-  destination: 'public/uploads',
-  filename: (req, file, cb) => {
-    cb(null, Date.now() + '-' + file.originalname)
-  }
-})
+const mbToBits = mb => 1024 * 1024 * mb
 const upload = multer({
-  storage,
-  limits: { fileSize: 1000000 }
+  storage: multer.memoryStorage(),
+  limits: { fileSize: mbToBits(2) }
 });
+const uploadImage = require('./services/firebase')
 
 const app = express()
 const port = process.env.PORT || 4000
@@ -22,8 +18,9 @@ app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
-// multipart/form-data
+// multipart/form-data 
 app.use(upload.single('image'))
+app.use(uploadImage)
 app.use(express.static('public'))
 
 app.get('/', (req, res) => {

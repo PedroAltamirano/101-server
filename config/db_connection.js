@@ -16,9 +16,6 @@ const sequelize = new Sequelize(
     dialect: 'mysql',
     dialectModule: mysql2
   });
-sequelize.on('error', error => {
-  console.log(error)
-})
 
 const Movie = MovieModel(sequelize, Sequelize)
 const Actor = ActorModel(sequelize, Sequelize)

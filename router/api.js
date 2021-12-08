@@ -1,6 +1,6 @@
 const router = require("express").Router();
 
-const { Movie, Actor, Genre } = require('../db_connection')
+const { Movie, Actor, Genre } = require('../config/db_connection')
 
 router.get('/genres', async (req, res) => {
   const genres = await Genre.findAll()
@@ -15,10 +15,11 @@ router.get('/actors', async (req, res) => {
 
 router.post('/actor', async (req, res) => {
   let data = req.body
+  console.log(req.file)
   if (req.file != null) {
     data = {
       ...data,
-      img: req.file.filename
+      img: req.file.firebaseUrl
     }
   }
   const actor = await Actor.create(data)

@@ -6,6 +6,7 @@ const MovieModel = require('../models/movie')
 const ActorModel = require('../models/actor')
 const GenreModel = require('../models/genre')
 
+console.log(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSW, process.env.DB_HOST)
 const sequelize = new Sequelize(
   process.env.DB_NAME,
   process.env.DB_USER,
@@ -15,6 +16,9 @@ const sequelize = new Sequelize(
     dialect: 'mysql',
     dialectModule: mysql2
   });
+sequelize.on('error', error => {
+  console.log(error)
+})
 
 const Movie = MovieModel(sequelize, Sequelize)
 const Actor = ActorModel(sequelize, Sequelize)

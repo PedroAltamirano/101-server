@@ -1,4 +1,5 @@
 const { Sequelize } = require('sequelize');
+const mysql2 = require('mysql2')
 require('dotenv').config()
 
 const MovieModel = require('../models/movie')
@@ -11,7 +12,8 @@ const sequelize = new Sequelize(
   process.env.DB_PASSW,
   {
     host: process.env.DB_HOST,
-    dialect: 'mysql'
+    dialect: 'mysql',
+    dialectModule: mysql2
   });
 
 const Movie = MovieModel(sequelize, Sequelize)

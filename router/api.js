@@ -12,12 +12,28 @@ router.get('/actors', async (req, res) => {
   const actors = await Actor.findAll()
   res.json(actors)
 })
+
 router.post('/actor', async (req, res) => {
-  const actor = await Actor.create(req.body)
+  let data = req.body
+  if (req.file != null) {
+    data = {
+      ...data,
+      img: req.file.filename
+    }
+  }
+  const actor = await Actor.create(data)
   res.json({ success: 'creado', actor })
 })
+
 router.put('/actor/:id', async (req, res) => {
-  await Actor.update(req.body, {
+  let data = req.body
+  if (req.file != null) {
+    data = {
+      ...data,
+      img: req.file.filename
+    }
+  }
+  await Actor.update(data, {
     where: { id: req.params.id }
   })
   res.json({ success: 'modificado' })
@@ -28,10 +44,12 @@ router.get('/movies', async (req, res) => {
   const movies = await Movie.findAll()
   res.json(movies)
 })
+
 router.post('/movie', async (req, res) => {
   const movie = await Movie.create(req.body)
   res.json({ success: 'creado', movie })
 })
+
 router.put('/movie/:id', async (req, res) => {
   await Movie.update(req.body, {
     where: { id: req.params.id }

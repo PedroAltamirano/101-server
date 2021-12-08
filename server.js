@@ -30,6 +30,10 @@ app.use(express.static('public'))
 
 app.use('/api', apiRouter)
 
+app.get('/', (req, res) => {
+  res.send('101 Server online')
+})
+
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
 })
